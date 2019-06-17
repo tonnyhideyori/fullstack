@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === "production") {
       {
         clientID: keys.googleclientId,
         clientSecret: keys.googleclientSecret,
-        callbackURL: "/auth/google/callback",
+        callbackURL: "https://fullstacked.herokuapp.com/auth/google/callback",
         passReqToCallback: true
       },
       async (req, accessToken, refreshToken, profile, done) => {

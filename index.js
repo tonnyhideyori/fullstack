@@ -5,7 +5,10 @@ const keys = require("./keys/key.js");
 const app = express();
 app.use(cors());
 if (process.env.NODE_ENV === "production") {
-  mongoose.connect(keys.mongoURI,{useNewUrlParser:true});
+  mongoose
+    .connect(keys.mongoURI, { useNewUrlParser: true })
+    .then(console.log("connected to mongodb.."))
+    .catch(err => console.log(`error connecting to mongo db ${err}`));
 } else {
   mongoose
     .connect(keys.mongoURI, { useNewUrlParser: true })
