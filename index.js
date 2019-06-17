@@ -5,7 +5,7 @@ const keys = require("./keys/key.js");
 const app = express();
 app.use(cors());
 if (process.env.NODE_ENV === "production") {
-  mongoose.connect(keys.mongoURI);
+  mongoose.connect(keys.mongoURI,{useNewUrlParser:true});
 } else {
   mongoose
     .connect(keys.mongoURI, { useNewUrlParser: true })
