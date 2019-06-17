@@ -21,7 +21,7 @@ app.use(
 );
 
 require("./service/passport");
-require("./routers/home")(app);
+//require("./routers/home")(app);
 require("./routers/auth")(app);
 require("./routers/secret")(app);
 
