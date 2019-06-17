@@ -62,5 +62,5 @@ module.exports = app => {
       console.log(req.user);
       res.header("token", req.user.token).send(req.user);
     }
-  );
+  );//
 };
