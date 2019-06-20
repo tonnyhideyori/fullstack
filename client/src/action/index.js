@@ -1,5 +1,6 @@
 import axios from "axios";
-import { AUTH_USER, AUTH_ERROR, AUTH_USER_GOOGLE } from "./types";
+import * as qs from "query-string";
+import { AUTH_USER, AUTH_ERROR } from "./types";
 //axios.defaults.headers.get["Content-Type"] = "application/json";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
@@ -11,6 +12,7 @@ export const signup = (formProps, callback) => async dispatch => {
       type: AUTH_USER,
       payload: res.data
     });
+
     localStorage.setItem("user", JSON.stringify(res.data));
     callback();
   } catch (error) {
@@ -20,17 +22,17 @@ export const signup = (formProps, callback) => async dispatch => {
     });
   }
 };
-export const googleAuth = callback => async dispatch => {
-  try {
-    await axios.get("/auth/google");
-    let res = await axios.get("/auth/google/callback");
-    console.log(res.data);
-    dispatch({
-      type: AUTH_USER_GOOGLE,
-      payload: res.data
-    });
-    callback();
-  } catch (error) {}
+export const googleAuth = () => dispatch => {
+  const res = qs.parse(window.location.search);
+  let data = { name: res.name, id: res.id };
+  
+  console.log(JSON.stringify(data));
+  dispatch({
+    type: AUTH_USER,
+    payload: data
+  });
+  localStorage.setItem("user", JSON.stringify(data));
+  //callback();
 };
 export const logout = callback => {
   localStorage.removeItem("user");
@@ -47,6 +49,7 @@ export const signin = (formProps, callback) => async dispatch => {
       type: AUTH_USER,
       payload: res.data
     });
+    console.log(JSON.stringify(res.data));
     localStorage.setItem("user", JSON.stringify(res.data));
     callback();
   } catch (error) {
@@ -56,4 +59,3 @@ export const signin = (formProps, callback) => async dispatch => {
     });
   }
 };
-

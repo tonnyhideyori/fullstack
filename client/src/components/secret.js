@@ -5,14 +5,15 @@ import requireAuth from './requireAuth'
 import { Link } from 'react-router-dom'
 import * as actions from '../action'
 class secret extends Component {
+  componentDidMount() {
+    this.props.googleAuth()
+  }
     renderDisplay() {
-        if (this.props.person == null) {
-          return <p>you are no body</p>
-        }
-        else {
-           return <div> hi {this.props.person.name }
-        <p>your Id is {this.props.person.id} </p></div>
-        }
+      if (this.props.person !== null) {
+         
+        return <div> hi {this.props.person.name}
+          <p>your Id is {this.props.person.id} </p></div>
+      }
   }
   render() {
     console.log(this.props.person);

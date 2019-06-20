@@ -1,5 +1,5 @@
+const queryString= require('querystring')
 const express = require("express");
-
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
 const passport = require("passport");
@@ -59,8 +59,15 @@ module.exports = app => {
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/", session: false }),
     (req, res) => {
-      console.log(req.user);
-      res.header("token", req.user.token).send(req.user);
+      //console.log(req.user.token);
+      const validUser = {
+        id: req.user.user.id,
+        name: req.user.user.name,
+       token:req.user.token
+      }
+      const query = queryString.stringify(validUser)
+      console.log(query)
+      res.redirect("/secret?" + query);
     }
-  );//
+  ); //
 };

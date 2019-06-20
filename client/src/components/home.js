@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as actions from '../action'
-import {connect} from 'react-redux'
+import * as actions from "../action";
+import { connect } from "react-redux";
+
 class home extends Component {
+  renderDisplay() {
+    
+  }
   render() {
     return (
       <div>
@@ -14,10 +18,22 @@ class home extends Component {
           <Link to="/signin">signin</Link>
         </p>
         <p>
-          <button onClick={e=>{this.props.googleAuth(()=>{this.props.history.push('/secret')})}}>sign in with google</button>
+          <a
+            href="/auth/google"
+          >
+            <button>sign in with google</button>
+          </a>
         </p>
       </div>
     );
   }
 }
-export default connect(null,actions) (home);
+function mapStateToProps(state) {
+  return {
+    auth: state.auth.authenticated
+  };
+}
+export default connect(
+  mapStateToProps,
+  actions
+)(home);

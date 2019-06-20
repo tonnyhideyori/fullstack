@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "production") {
             }
           });
           await user.save();
-          console.log(user);
+          //console.log(user);
           const token = user.AuthToken();
           console.log("jwt token ", token);
           done(null, {
@@ -56,14 +56,14 @@ if (process.env.NODE_ENV === "production") {
         passReqToCallback: true
       },
       async (req, accessToken, refreshToken, profile, done) => {
-        console.log(profile.name.givenName);
+        //console.log(profile.name.givenName);
         let user = await User.findOne({
           "Google.id": profile.id
         });
         if (user) {
-          console.log("existing user", user);
+         // console.log("existing user", user);
           const token = user.AuthToken();
-          console.log("jwt token ", token);
+          //console.log("jwt token ", token);
           done(null, {
             user: user,
             token: token
@@ -76,8 +76,8 @@ if (process.env.NODE_ENV === "production") {
           });
           const token = user.AuthToken();
           user = await user.save();
-          console.log("new user ", user);
-          console.log("jwt token ", token);
+          //console.log("new user ", user);
+          //console.log("jwt token ", token);
           return done(null, { user: user, token: token });
         }
       }
