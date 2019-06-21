@@ -1,5 +1,6 @@
 import axios from "axios";
 import * as qs from "query-string";
+import lodash from 'lodash'
 import { AUTH_USER, AUTH_ERROR } from "./types";
 //axios.defaults.headers.get["Content-Type"] = "application/json";
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -22,17 +23,21 @@ export const signup = (formProps, callback) => async dispatch => {
     });
   }
 };
-export const googleAuth = () => dispatch => {
+export const googleAuth = callback => dispatch => {
+
   const res = qs.parse(window.location.search);
-  let data = { name: res.name, id: res.id };
+  if (lodash.isEmpty(res)) { return }
+  else {
+    let data = { name: res.name, id: res.id };
   
-  console.log(JSON.stringify(data));
-  dispatch({
-    type: AUTH_USER,
-    payload: data
-  });
-  localStorage.setItem("user", JSON.stringify(data));
-  //callback();
+    console.log(JSON.stringify(data));
+    dispatch({
+      type: AUTH_USER,
+      payload: data
+    });
+    localStorage.setItem("user", JSON.stringify(data));
+    callback();
+  }
 };
 export const logout = callback => {
   localStorage.removeItem("user");

@@ -4,9 +4,12 @@ import * as actions from "../action";
 import { connect } from "react-redux";
 
 class home extends Component {
-  renderDisplay() {
-    
+  componentDidMount() {
+    this.props.googleAuth(() => {
+      this.props.history.push('/secret')
+    })
   }
+  renderDisplay() {}
   render() {
     return (
       <div>
@@ -18,9 +21,7 @@ class home extends Component {
           <Link to="/signin">signin</Link>
         </p>
         <p>
-          <a
-            href="/auth/google"
-          >
+          <a href="http://localhost:5000/auth/google">
             <button>sign in with google</button>
           </a>
         </p>

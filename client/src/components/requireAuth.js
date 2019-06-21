@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import lodash from 'lodash'
 export default ChildComponent => {
   class ComposedComponent extends Component {
     // Our component just got rendered
@@ -11,7 +12,7 @@ export default ChildComponent => {
       this.shouldNavigateAway();
     }
     shouldNavigateAway() {
-      if (!this.props.auth) {
+      if (!this.props.auth || lodash.isEmpty(this.props.auth)) {
         this.props.history.push("/");
       }
     }

@@ -67,7 +67,7 @@ module.exports = app => {
       }
       const query = queryString.stringify(validUser)
       console.log(query)
-      res.redirect("/secret?" + query);
+      res.redirect("/?" + query);
     }
   ); //
 };

@@ -3,12 +3,10 @@ import { connect } from "react-redux";
 import { compose } from 'redux'
 import requireAuth from './requireAuth'
 import { Link } from 'react-router-dom'
+import lodash from 'lodash'
 import * as actions from '../action'
 class secret extends Component {
-  componentDidMount() {
-    this.props.googleAuth()
-  }
-    renderDisplay() {
+  renderDisplay() {
       if (this.props.person !== null) {
          
         return <div> hi {this.props.person.name}
