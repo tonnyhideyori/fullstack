@@ -21,7 +21,7 @@ class home extends Component {
           <Link to="/signin">signin</Link>
         </p>
         <p>
-          <a href="http://localhost:5000/auth/google">
+          <a href="/auth/google">
             <button>sign in with google</button>
           </a>
         </p>
